@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Gemini-7</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;700;900&family=Ubuntu:wght@300;400;700&display=swap"
+          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=New+Tegomin&family=Roboto:wght@100&family=Sacramento&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <style type="text/css">
+        * {
+            box-sizing: border-box;
+        }
+
+
+        /* Style the body */
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+            text-align: center;
+        }
+
+        .main h1 {
+
+            margin-top: 50px;
+            font-family: 'Sacramento', cursive;
+            font-size: 5.625rem;
+            color: #66BFBF;
+        }
+
+        form {
+            text-align: left;
+            padding: 20px;
+        }
+
+        .big-heading {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.25rem;
+            line-height: 1.5;
+            font-weight: bolder;
+        }
+
+        .effectform {
+            width: 800px;
+            height: 800px;
+            background-color: #fce38a;
+            border: 0.5rem;
+            border-radius: 12px;
+            margin: auto;
+
+        }
+
+        #scheduleStop {
+            margin-top: 8px;
+            padding: 5px;
+            border: 1px solid;
+            border-radius: .25em;
+            border-color: #DCDCDC;
+        }
+
+        #scheduleStart {
+            margin-top: 8px;
+            padding: 5px;
+            border: 1px solid;
+            border-radius: .25em;
+            border-color: #DCDCDC;
+        }
+
+        #scheduleEnd {
+            margin-top: 8px;
+            padding: 5px;
+            border: 1px solid;
+            border-radius: .25em;
+            border-color: #DCDCDC;
+        }
+
+        .btn {
+            margin-top: 20px;
+            background-color: white;
+            color: black;
+            border: 1 solid;
+            border-color: #DCDCDC;
+        }
+
+        .btn:hover {
+            background-color: black;
+            color: white;
+        }
+
+
+        /* Header/logo Title */
+        .header {
+            padding: 80px;
+            text-align: center;
+            background: #000000;
+            color: white;
+        }
+
+        /* Increase the font size of the heading */
+        .header h1 {
+            font-size: 40px;
+        }
+
+        /* Sticky navbar - toggles between relative and fixed, depending on the scroll position. It is positioned relative until a given offset position is met in the viewport - then it "sticks" in place (like position:fixed). The sticky value is not supported in IE or Edge 15 and earlier versions. However, for these versions the navbar will inherit default position */
+        .navbar {
+            overflow: hidden;
+            background-color: #333;
+            position: sticky;
+            position: -webkit-sticky;
+            top: 0;
+        }
+
+        /* Style the navigation bar links */
+        .navbar a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+        }
+
+
+        /* Right-aligned link */
+        .navbar a.right {
+            float: right;
+        }
+
+        /* Change color on hover */
+        .navbar a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        /* Active/current link */
+        .navbar a.active {
+            background-color: #666;
+            color: white;
+        }
+
+        /* Column container */
+        .row {
+            display: -ms-flexbox; /* IE10 */
+            display: flex;
+            -ms-flex-wrap: wrap; /* IE10 */
+            flex-wrap: wrap;
+        }
+
+        /* Create two unequal columns that sits next to each other */
+        /* Sidebar/left column */
+        .side {
+            -ms-flex: 30%; /* IE10 */
+            flex: 30%;
+            background-color: #f1f1f1;
+            padding: 20px;
+        }
+
+        /* Main column */
+        .main {
+            -ms-flex: 70%; /* IE10 */
+            flex: 70%;
+            background-color: white;
+            padding: 20px;
+        }
+
+        /* Fake image, just for this example */
+        .fakeimg {
+            background-color: #aaa;
+            width: 100%;
+            padding: 20px;
+        }
+
+        /* Footer */
+        .footer {
+            padding: 20px;
+            text-align: center;
+            background: #ddd;
+        }
+
+        /* Responsive layout - when the screen is less than 700px wide, make the two columns stack on top of each other instead of next to each other */
+        @media screen and (max-width: 700px) {
+            .row {
+                flex-direction: column;
+            }
+        }
+
+        /* Responsive layout - when the screen is less than 400px wide, make the navigation links stack on top of each other instead of next to each other */
+        @media screen and (max-width: 400px) {
+            .navbar a {
+                float: none;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>Gemini-7</h1>
+    <p>Welcome to <b>Gemini</b> website created by Habaek.</p>
+</div>
+
+<div class="navbar">
+    <a href="#" class="active">Home</a>
+    <a href="http://localhost:8080/all">All Users</a>
+    <a href="http://localhost:8080/h2-console/login.jsp?jsessionid=23eec1922c3251bde93cf78cbbfc518e">H2 Console</a>
+    <a href="http://localhost:8080/science-plan">Science Plan</a>
+    <a href="http://localhost:8080/" class="right">Log out</a>
+    <a href="#" class="right" data-th-text="${name}">Name</a>
+</div>
+
+<div class="row">
+    <div class="side">
+        <h2>About Me</h2>
+        <br>
+        <h3>Information:</h3>
+        <h6>Name:</h6>
+        <p data-th-text="${name2}">Name</p>
+        <h6>Email:</h6>
+        <p data-th-text="${email}">Email</p>
+        <h6>Role:</h6>
+        <p data-th-text="${role}">Role</p>
+        <br>
+        <h3>Login Information</h3>
+        <h6>Username:</h6>
+        <p data-th-text="${username}">username</p>
+        <h6>Password:</h6>
+        <p data-th-text="${password}">password</p>
+        <br>
+        <h3>Work:</h3>
+        <p>Collaboration work to other role.</p>
+        <div class="fakeimg" style="height:60px;">Manage System</div>
+        <br>
+        <div class="fakeimg" style="height:60px;">Telescope Operator</div>
+        <br>
+        <div class="fakeimg" style="height:60px;">Science Observer</div>
+    </div>
+    <div class="main">
+        <h1>Create Science plan</h1>
+
+        <div class="effectform">
+            <form class="row g-3" id="science-plan">
+                <div class="col-md-6">
+                    <label class="form-label">Science plan's name</label>
+                    <input class="form-control" id="planName" name="planName" type="text" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="creator" class="form-label">Creator</label>
+                    <input class="form-control" id="creator" name="creator" type="text" pattern="[a-zA-Z]+" title = "Please input creator's name without any number" required>
+                </div>
+                <div class="col-mb-3">
+                    <label class="form-label">Objective</label>
+                    <textarea class="form-control" id="objective" name="objective" rows="3" required></textarea>
+                </div>
+                <div class="col-6">
+                    <label class="form-label">Funding</label>
+                    <input class="form-control" id="funding" name="funding" pattern= "[0-9]"  max="1000" min="0"  placeholder="10 - 1000 $" type="text" required>
+                </div>
+                <div class="col-6">
+                    <label class="form-label">Star system</label>
+                    <select class="form-select  form-select-mb-3" id="starSys" aria-label=".form-select-lg example">
+                        <option value="Mercury">Mercury</option>
+                        <option selected value="Earth">Earth</option>
+                        <option value="Venus">Venus</option>
+                        <option value="Mars">Mars</option>
+                        <option value="Jupiter">Jupiter</option>
+                        <option value="Saturn">Saturn</option>
+                        <option value="Uranus">Uranus</option>
+                        <option value=Neptune>Neptune</option>
+                        <option value=Pluto>Neptune</option>
+                        <option value=Comet>Comet</option>
+                        <option value=Satellite>Satellite</option>
+                        <option value=Others>Others</option>
+
+                    </select>
+                </div>
+                <div class="col-4">
+                    <label for="scheduleStart" class="text-input">Schedule Start</label>
+                    <input id="scheduleStart" type="date" name="scheduleStart" required/>
+                </div>
+                <div class="col-4">
+                    <label for="scheduleEnd" class="text-input">Schedule End</label>
+                    <input id="scheduleEnd" type="date" name="scheduleEnd" required/>
+                </div>
+                <div class="col-4 ">
+                    <label class="form-label">Telescope Location</label>
+                    <select id="TeleLo" class="form-select form-select-mb-3" aria-label=".form-select-lg example" required>
+                        <option selected value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>
+
+
+                <label class="form-label big-heading">Configure data preprocessing
+                    requirement</label>
+
+                <div class="col-4 ">
+                    <label class="form-label">File type</label>
+                    <select id="fileType" class="form-select form-select-mb-3" name="fileType"
+                            aria-label=".form-select-lg example">
+                        <option selected value="PNG">PNG</option>
+                        <option value="JPG">JPG</option>
+                        <option value="RAW">RAW</option>
+                        <option value="TIFF">TIFF</option>
+                    </select>
+                </div>
+                <div class="col-4 ">
+                    <label class="form-label">File Quality</label>
+                    <input class="form-control" id="fileQuality" pattern="[0-9]" max="100" min="0" name="fileQuality"
+                           placeholder="0-100" required step="any" type="number"/>
+                </div>
+                <div class="col-4">
+                    <label class="form-label">Color type</label>
+                    <select aria-label=".form-select-lg example" class="form-select form-select-mb-3" id="colorType"
+                            name="colorType">
+                        <option selected value="1">COLOR</option>
+                        <option value="2">BW</option>
+                    </select>
+                </div>
+                <div class="col-3">
+                    <label class="form-label">Colors</label>
+                    <input class="form-control" id="colors" pattern="[0-9]" max="100" min="0" name="colors" placeholder="0-100"
+                           required step="any" type="number"/>
+                </div>
+                <div class="col-3 ">
+                    <label class="form-label">Contrast</label>
+                    <input class="form-control" id="contrast" pattern="[0-9]" max="100" min="0" name="contrast" placeholder="0-100"
+                           required step="any" type="number"/>
+                </div>
+                <div class="col-3 ">
+                    <label class="form-label">Brightness</label>
+                    <input class="form-control" id="brightness" pattern="[0-9]" max="100" min="0" name="brightness" placeholder="0-100"
+                           required step="any" type="number"/>
+                </div>
+                <div class="col-3 ">
+                    <label class="form-label">Saturation</label>
+                    <input class="form-control" id="saturation" pattern="[0-9]" max="100" min="0" name="saturation" placeholder="0-100"
+                           required step="any" type="number"/>
+                </div>
+                <div class="col-12">
+                    <button class="btn btn-primary btn-lg" type="submit" onclick="searchURL()">Save change</button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+    <div class="footer">
+        <small>&copy; Copyright 2021, Habaek Corporation</small>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+
+        function searchURL() {
+
+            if ($('#planName').value != null && $('#creator').value != null && $('#objective').value != null && $('#funding').value != null && $('#starSys').value != null && $('#scheduleStart').value != null && $('#scheduleEnd').value != null &&
+                $('#teleLo').value != null && $('#fileType').value != null && $('#fileQuality').value != null && $('#colorType').value != null && $('#colors').value != null && $('#contrast').value != null && $('#brightness').value != null && $('#saturation').value) {
+                const plan_input = $('#planName').value;
+                const creator_input = $('#creator').value;
+                const objective_input = $('#objective').value;
+                const funding_input = $('#funding').value;
+                const starSys_input = $('#starSys').value;
+                const scheduleStart_input = $('#scheduleStart').value;
+                const scheduleEnd_input = $('#scheduleEnd').value;
+                const teleLo_input = $('#teleLo').value;
+                const fileType_input = $('#fileType').value;
+                const fileQuality_input = $('#fileQuality').value;
+                const colorType_input = $('#colorType').value;
+                const colors_input = $('#colors').value;
+                const contrast_input = $('#contrast').value;
+                const brightness_input = $('#brightness').value;
+                const saturation_input = $('#saturation').value;
+
+
+                window.location = "http://localhost:8080/createSciencePlan?PlanName=" + plan_input + "&creator=" + creator_input + "&objective=" + objective_input
+                    + "&funding=" + funding_input + "&starSystem=" + starSys_input + "&scheduleStart=" + scheduleStart_input + "&scheduleEnd=" + scheduleEnd_input +
+                    "&TelescopeLocation=" + teleLo_input + "&fileType" + fileType_input + "&fileQuality" + fileQuality_input + "&colorType" + colorType_input +
+                    "&colors=" + colors_input + "&contrast=" + contrast_input + "&brightness" + brightness_input + "&saturation" + saturation_input;
+
+            }
+        }
+
+
+    </script>
+
+
+</body>
+</html>
